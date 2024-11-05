@@ -19,8 +19,9 @@ jinja2 (do szablonów HTML)
 
 Sklonuj repozytorium:
 
-git clone https://github.com/Marcinolo/PROJEKT_3.git
-cd PROJEKT_3
+git clone https://github.com/Kiniaka/DataScienceGroupProject.git
+cd DataScienceGroupProject
+
 Zainstaluj wymagane pakiety:
 
 pip install -r requirements.txt
