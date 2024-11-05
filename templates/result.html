@@ -2,11 +2,18 @@
 <html>
   <head>
     <title>Wyniki Predykcji</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" />
   </head>
 
   <body>
     <h1>Wyniki Predykcji</h1>
-    <p>Prawdopodobieństwo pozostania klienta: {{ probability_stay }}</p>
-    <p>Prawdopodobieństwo rezygnacji klienta: {{ probability_churn }}</p>
+    <div class="form2">
+      <p>Prawdopodobieństwo pozostania klienta: {{ probability_stay }}</p>
+      <p>Prawdopodobieństwo rezygnacji klienta: {{ probability_churn }}</p>
+    </div>
   </body>
 </html>

@@ -1,0 +1,59 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  background: rgb(168, 194, 237);
+}
+
+.form {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.form2 {
+  width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  color: navy;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+label {
+  text-align: center;
+  margin-bottom: 1px;
+  font-size: 10px;
+  color: navy;
+}
+
+p {
+  margin-bottom: 1px;
+  font-size: 18px;
+  color: navy;
+}
+
+input[type="text"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+button,
+input[type="submit"] {
+  display: inline-block;
+  background-color: navy;
+  color: rgb(137, 199, 227);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
