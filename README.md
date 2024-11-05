@@ -6,25 +6,31 @@ Aplikacja FastAPI, która przewiduje prawdopodobieństwo rezygnacji klienta na p
 
 ## Wymagania
 
-Python 3.7 lub nowszy
-FastAPI
-Uvicorn
-scikit-learn
-joblib
-numpy
-pandas
-jinja2 (do szablonów HTML)
+- Python 3.7 lub nowszy,
+- FastAPI,
+- Uvicorn,
+- scikit-learn,
+- joblib,
+- numpy,
+- pandas,
+- jinja2 (do szablonów HTML).
 
 ## Instalacja
 
-Sklonuj repozytorium:
+1. Sklonuj repozytorium:
 
-git clone https://github.com/Kiniaka/DataScienceGroupProject.git
-cd DataScienceGroupProject
-Zainstaluj wymagane pakiety:
+   git clone https://github.com/Kiniaka/DataScienceGroupProject.git
 
-pip install -r requirements.txt
+2. Wejdz w comend line do odpowiedniego katalogu:
+
+   cd DataScienceGroupProject
+
+3. Zainstaluj wymagane pakiety:
+
+   pip install -r requirements.txt
+
 Umieść model model_random_forest.pkl w katalogu projektu. Plik ten powinien zawierać wytrenowany model Random Forest oraz skaler, zapisany w formacie:
 
 {'model': trained_model, 'scaler': scaler}
+
 Upewnij się, że plik .env zawiera wymagane zmienne środowiskowe
