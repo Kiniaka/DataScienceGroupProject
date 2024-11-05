@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Predykcja rezygnacji klienta</title>
+  </head>
+
+  <body>
+    <h1>Wprowadź dane do predykcji rezygnacji klienta</h1>
+    <form action="/predict_churn" method="post">
+      <label for="is_tv_subscriber"
+        >Czy subskrybuje telewizję? (1 - tak, 0 - nie):</label
+      ><br />
+      <input
+        type="radio"
+        id="is_tv_subscriber_yes"
+        name="is_tv_subscriber"
+        value="1"
+        required
+      />
+      <label for="is_tv_subscriber_yes">Tak</label>
+      <input
+        type="radio"
+        id="is_tv_subscriber_no"
+        name="is_tv_subscriber"
+        value="0"
+        required
+      />
+      <label for="is_tv_subscriber_no">Nie</label><br /><br />
+
+      <label for="is_movie_package_subscriber"
+        >Czy subskrybuje pakiet filmowy? (1 - tak, 0 - nie):</label
+      ><br />
+      <input
+        type="radio"
+        id="is_movie_package_subscriber_yes"
+        name="is_movie_package_subscriber"
+        value="1"
+        required
+      />
+      <label for="is_movie_package_subscriber_yes">Tak</label>
+      <input
+        type="radio"
+        id="is_movie_package_subscriber_no"
+        name="is_movie_package_subscriber"
+        value="0"
+        required
+      />
+      <label for="is_movie_package_subscriber_no">Nie</label><br /><br />
+
+      <label for="subscription_age">Wiek subskrypcji (lata):</label><br />
+      <input
+        type="number"
+        step="0.1"
+        id="subscription_age"
+        name="subscription_age"
+        required
+      /><br /><br />
+
+      <label for="bill_avg">Średni rachunek w zł:</label><br />
+      <input
+        type="number"
+        step="0.01"
+        id="bill_avg"
+        name="bill_avg"
+        required
+      /><br /><br />
+
+      <label for="reamining_contract">Pozostały czas umowy (lata):</label><br />
+      <input
+        type="number"
+        step="0.1"
+        id="reamining_contract"
+        name="reamining_contract"
+        required
+      /><br /><br />
+
+      <label for="service_failure_count">Liczba awarii usług:</label><br />
+      <input
+        type="number"
+        id="service_failure_count"
+        name="service_failure_count"
+        required
+      /><br /><br />
+
+      <label for="download_avg">Średni download:</label><br />
+      <input
+        type="number"
+        step="0.01"
+        id="download_avg"
+        name="download_avg"
+        required
+      /><br /><br />
+
+      <label for="upload_avg">Średni upload:</label><br />
+      <input
+        type="number"
+        step="0.01"
+        id="upload_avg"
+        name="upload_avg"
+        required
+      /><br /><br />
+
+      <label for="download_over_limit"
+        >Czy przekroczono limit downloadu? (1 - tak, 0 - nie):</label
+      ><br />
+      <input
+        type="radio"
+        id="download_over_limit_yes"
+        name="download_over_limit"
+        value="1"
+        required
+      />
+      <label for="download_over_limit_yes">Tak</label>
+      <input
+        type="radio"
+        id="download_over_limit_no"
+        name="download_over_limit"
+        value="0"
+        required
+      />
+      <label for="download_over_limit_no">Nie</label><br /><br />
+
+      <input type="submit" value="Przewiduj" />
+    </form>
+  </body>
+</html>
