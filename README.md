@@ -21,7 +21,7 @@ Aplikacja FastAPI, która przewiduje prawdopodobieństwo rezygnacji klienta na p
 
    git clone https://github.com/Kiniaka/DataScienceGroupProject.git
 
-2. Wejdz w comend line do ospowiedniego katalogu:
+2. Wejdz w comend line do odpowiedniego katalogu:
 
    cd DataScienceGroupProject
 
