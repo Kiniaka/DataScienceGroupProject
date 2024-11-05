@@ -6,14 +6,14 @@ Aplikacja FastAPI, która przewiduje prawdopodobieństwo rezygnacji klienta na p
 
 ## Wymagania
 
-Python 3.7 lub nowszy
-FastAPI
-Uvicorn
-scikit-learn
-joblib
-numpy
-pandas
-jinja2 (do szablonów HTML)
+- Python 3.7 lub nowszy,
+- FastAPI,
+- Uvicorn,
+- scikit-learn,
+- joblib,
+- numpy,
+- pandas,
+- jinja2 (do szablonów HTML).
 
 ## Instalacja
 
