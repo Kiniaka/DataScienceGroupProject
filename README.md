@@ -34,3 +34,12 @@ Umieść model model_random_forest.pkl w katalogu projektu. Plik ten powinien za
 {'model': trained_model, 'scaler': scaler}
 
 Upewnij się, że plik .env zawiera wymagane zmienne środowiskowe
+
+## Uruchamianie aplikacji
+
+1. Upewnij się, że serwer jest uruchomiony w środowisku zdefiniowanym w `.env`.
+2. Uruchom aplikację za pomocą Uvicorn:
+   ```bash
+   uvicorn main:app --reload --port 8080
+   ```
+3. Otwórz przeglądarkę i przejdź na adres: [http://127.0.0.1:8000/form].
