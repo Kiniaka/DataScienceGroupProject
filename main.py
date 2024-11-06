@@ -5,6 +5,7 @@ from pydantic import BaseModel
 import numpy as np
 import joblib
 import pandas as pd
+from fastapi.staticfiles import StaticFiles 
 
 # Ładowanie modelu i skalera
 loaded = joblib.load('model_random_forest.pkl')
@@ -13,6 +14,9 @@ scaler = loaded['scaler']
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
+
+# Dodanie obsługi plików statycznych
+app.mount("/static", StaticFiles(directory="templates"), name="static")
 
 # Definiowanie modelu danych wejściowych
 
