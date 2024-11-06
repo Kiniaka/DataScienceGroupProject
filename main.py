@@ -4,19 +4,27 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import numpy as np
 import joblib
-import pandas as pd
-
-# Ładowanie modelu i skalera
-loaded = joblib.load('model_random_forest.pkl')
-model = loaded['model']
-scaler = loaded['scaler']
+import os
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
-# Definiowanie modelu danych wejściowych
+# Load the model and scaler
+model_path = 'C:/Project/myProject/DataScienceGroupProject/new/model_random_forest.pkl'
+if os.path.exists(model_path):
+    try:
+        loaded = joblib.load(model_path)
+        model = loaded.get('model')
+        scaler = loaded.get('scaler')
+    except EOFError:
+        print("Error: model_random_forest.pkl is corrupted or incomplete.")
+        model, scaler = None, None
+else:
+    print("Error: model_random_forest.pkl file not found.")
+    model, scaler = None, None
 
 
+# Define the input data model
 class ClientData(BaseModel):
     is_tv_subscriber: int
     is_movie_package_subscriber: int
@@ -47,8 +55,15 @@ async def predict_churn(
     upload_avg: float = Form(...),
     download_over_limit: int = Form(...)
 ):
+    # Check if model and scaler are loaded successfully
+    if model is None or scaler is None:
+        return templates.TemplateResponse("error.html", {
+            "request": request,
+            "error": "Model or scaler is not available. Please check the model file."
+        })
+
     try:
-        # Przetwarzanie danych wejściowych
+        # Process input data
         input_data = np.array([
             is_tv_subscriber,
             is_movie_package_subscriber,
@@ -61,15 +76,15 @@ async def predict_churn(
             download_over_limit
         ]).reshape(1, -1)
 
-        # Skalowanie danych
+        # Scale input data
         input_data_scaled = scaler.transform(input_data)
 
-        # Predykcja prawdopodobieństw
+        # Predict probabilities
         probabilities = model.predict_proba(input_data_scaled)
         prob_churn = probabilities[0][1]
         prob_stay = probabilities[0][0]
 
-        # Zwrócenie wyniku
+        # Return result
         return templates.TemplateResponse("result.html", {
             "request": request,
             "probability_stay": f"{prob_stay:.2f}",
@@ -77,5 +92,6 @@ async def predict_churn(
         })
 
     except Exception as e:
-        print(f"Błąd: {e}")
+        print(f"Error: {e}")
         return templates.TemplateResponse("error.html", {"request": request, "error": str(e)})
+
