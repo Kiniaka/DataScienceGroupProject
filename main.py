@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Request, Form
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import numpy as np
 import joblib
 import pandas as pd
-from fastapi.staticfiles import StaticFiles 
+from fastapi.staticfiles import StaticFiles
 
 # Ładowanie modelu i skalera
 loaded = joblib.load('model_random_forest.pkl')
@@ -33,8 +33,16 @@ class ClientData(BaseModel):
     download_over_limit: int
 
 
+# Trasa główna przekierowująca do formularza
+@app.get("/", response_class=RedirectResponse)
+async def root():
+    return RedirectResponse(url="/form")
+
+# Trasa do wyświetlenia formularza wejściowego dla przewidywania rezygnacji
+
+
 @app.get("/form", response_class=HTMLResponse)
-async def read_form(request: Request):
+async def show_form(request: Request):
     return templates.TemplateResponse("form.html", {"request": request})
 
 
