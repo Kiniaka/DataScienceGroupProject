@@ -1,16 +1,22 @@
+# Użycie obrazu bazowego Pythona
 FROM python:3.10-slim
 
-# Ustawienie katalogu roboczego wewnątrz kontenera
+# Ustawienie katalogu roboczego w kontenerze
 WORKDIR /app
 
-# Skopiowanie plików aplikacji do katalogu roboczego
-COPY . /app
+# Skopiowanie pliku requirements.txt do katalogu roboczego
+COPY requirements.txt /app/requirements.txt
 
-# Zainstalowanie zależności z requirements.txt
+# Instalacja zależności
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Eksponowanie portu, na którym działa aplikacja
-EXPOSE 8080
+# Skopiowanie katalogu templates i pozostałych plików aplikacji do kontenera
+COPY model_random_forest.pkl /app/model_random_forest.pkl
+COPY templates /app/templates
+COPY . /app
 
-# Polecenie do uruchomienia aplikacji FastAPI
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Skopiowanie skryptu startowego
+COPY start.sh /app/start.sh
+
+# Ustawienie skryptu jako komendy startowej
+CMD ["./start.sh"]
