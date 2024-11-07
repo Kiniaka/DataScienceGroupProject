@@ -9,6 +9,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
+      - ./model_random_forest.pkl:/app/model_random_forest.pkl
       - .:/app
     env_file:
       - .env

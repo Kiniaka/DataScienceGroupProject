@@ -13,6 +13,7 @@ Aplikacja FastAPI, która przewiduje prawdopodobieństwo rezygnacji klienta na p
 - joblib,
 - numpy,
 - pandas,
+- python-multipart,
 - jinja2 (do szablonów HTML).
 
 ## Instalacja
@@ -29,17 +30,29 @@ Aplikacja FastAPI, która przewiduje prawdopodobieństwo rezygnacji klienta na p
 
    pip install -r requirements.txt
 
+## Uruchamianie aplikacji
+
+1. Upewnij się, że serwer jest uruchomiony w środowisku zdefiniowanym w `.env`.
+2. Uruchom aplikację za pomocą Uvicorn:
+    ```bash
+    uvicorn main:app --reload --port 8000
+    ```
+3. Otwórz przeglądarkę i przejdź na adres: [http://127.0.0.1:8000/form].
+
+## Użycie
+- Wprowadź dane klienta w formularzu dostępnym pod `/form`.
+- Po przesłaniu danych wyświetli się prawdopodobieństwo pozostania (`probability_stay`) oraz prawdopodobieństwo rezygnacji (`probability_churn`).
+
+## Zmienne środowiskowe
+Zdefiniuj zmienne środowiskowe w pliku `.env` zgodnie z poniższym wzorcem:
+```dotenv
+MODEL_PATH=model_random_forest.pkl
+PORT=8000
+DEBUG=True
+
+
 Umieść model model_random_forest.pkl w katalogu projektu. Plik ten powinien zawierać wytrenowany model Random Forest oraz skaler, zapisany w formacie:
 
 {'model': trained_model, 'scaler': scaler}
 
 Upewnij się, że plik .env zawiera wymagane zmienne środowiskowe
-
-## Uruchamianie aplikacji
-
-1. Upewnij się, że serwer jest uruchomiony w środowisku zdefiniowanym w `.env`.
-2. Uruchom aplikację za pomocą Uvicorn:
-   ```bash
-   uvicorn main:app --reload --port 8080
-   ```
-3. Otwórz przeglądarkę i przejdź na adres: [http://127.0.0.1:8000/form].
