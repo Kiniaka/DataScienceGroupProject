@@ -8,14 +8,15 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link href="style.css" rel="stylesheet" />
+    <link href="/static/style.css" rel="stylesheet" />
   </head>
 
   <body>
     <h1>Wprowadź dane do predykcji rezygnacji klienta</h1>
     <div class="form">
       <form class="form2" action="/predict_churn" method="post">
-        <label for="is_tv_subscriber">Czy subskrybuje telewizję?:</label><br />
+        <label for="is_tv_subscriber"><b>Czy subskrybuje telewizję?:</b></label
+        ><br />
         <input
           type="radio"
           id="is_tv_subscriber_yes"
@@ -23,7 +24,7 @@
           value="1"
           required
         />
-        <label for="is_tv_subscriber_yes">Tak</label>
+        <label for="is_tv_subscriber_yes"><b>Tak</b></label>
         <input
           type="radio"
           id="is_tv_subscriber_no"
@@ -31,10 +32,11 @@
           value="0"
           required
         />
-        <label for="is_tv_subscriber_no">Nie</label><br /><br />
+        <label for="is_tv_subscriber_no"><b>Nie</b></label
+        ><br /><br />
 
         <label for="is_movie_package_subscriber"
-          >Czy subskrybuje pakiet filmowy?:</label
+          ><b>Czy subskrybuje pakiet filmowy?:</b></label
         ><br />
         <input
           type="radio"
@@ -43,7 +45,7 @@
           value="1"
           required
         />
-        <label for="is_movie_package_subscriber_yes">Tak</label>
+        <label for="is_movie_package_subscriber_yes"><b>Tak</b></label>
         <input
           type="radio"
           id="is_movie_package_subscriber_no"
@@ -51,9 +53,11 @@
           value="0"
           required
         />
-        <label for="is_movie_package_subscriber_no">Nie</label><br /><br />
+        <label for="is_movie_package_subscriber_no"><b>Nie</b></label
+        ><br /><br />
 
-        <label for="subscription_age">Wiek subskrypcji (lata):</label><br />
+        <label for="subscription_age"><b>Wiek subskrypcji (lata):</b></label
+        ><br />
         <input
           type="number"
           step="0.1"
@@ -63,7 +67,8 @@
           required
         /><br /><br />
 
-        <label for="bill_avg">Średni rachunek w zł:</label><br />
+        <label for="bill_avg"><b>Średni rachunek w zł:</b></label
+        ><br />
         <input
           type="number"
           step="0.01"
@@ -73,7 +78,8 @@
           required
         /><br /><br />
 
-        <label for="reamining_contract">Pozostały czas umowy (lata):</label
+        <label for="reamining_contract"
+          ><b>Pozostały czas umowy (lata):</b></label
         ><br />
         <input
           type="number"
@@ -84,7 +90,8 @@
           required
         /><br /><br />
 
-        <label for="service_failure_count">Liczba awarii usług:</label><br />
+        <label for="service_failure_count"><b>Liczba awarii usług:</b></label
+        ><br />
         <input
           type="number"
           min="0"
@@ -93,7 +100,8 @@
           required
         /><br /><br />
 
-        <label for="download_avg">Średni download:</label><br />
+        <label for="download_avg"><b>Średni download:</b></label
+        ><br />
         <input
           type="number"
           step="0.01"
@@ -103,7 +111,8 @@
           required
         /><br /><br />
 
-        <label for="upload_avg">Średni upload:</label><br />
+        <label for="upload_avg"><b>Średni upload:</b></label
+        ><br />
         <input
           type="number"
           step="0.01"
@@ -114,7 +123,7 @@
         /><br /><br />
 
         <label for="download_over_limit"
-          >Czy przekroczono limit downloadu?:</label
+          ><b>Czy przekroczono limit downloadu?:</b></label
         ><br />
         <input
           type="radio"
@@ -123,7 +132,7 @@
           value="1"
           required
         />
-        <label for="download_over_limit_yes">Tak</label>
+        <label for="download_over_limit_yes"><b>Tak</b></label>
         <input
           type="radio"
           id="download_over_limit_no"
@@ -131,7 +140,8 @@
           value="0"
           required
         />
-        <label for="download_over_limit_no">Nie</label><br /><br />
+        <label for="download_over_limit_no"><b>Nie</b></label
+        ><br /><br />
         <div class="form">
           <input type="submit" value="Przewiduj" />
         </div>

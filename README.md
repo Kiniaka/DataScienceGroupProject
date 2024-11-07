@@ -37,9 +37,16 @@ Upewnij się, że plik .env zawiera wymagane zmienne środowiskowe
 
 ## Uruchamianie aplikacji
 
-1. Upewnij się, że serwer jest uruchomiony w środowisku zdefiniowanym w `.env`.
-2. Uruchom aplikację za pomocą Uvicorn:
-   ```bash
-   uvicorn main:app --reload --port 8080
-   ```
-3. Otwórz przeglądarkę i przejdź na adres: [http://127.0.0.1:8000/form].
+1.  Upewnij się, że serwer jest uruchomiony w środowisku zdefiniowanym w `.env`.
+
+2.  Otwórz Dockera (np. Docker Desktop). Następnie w terminalu proszę stworzyć obraz na dockerze komendą:
+
+          docker compose up
+
+3.  Teraz otwórz drugi terminal i uruchom aplikację fastapi poprzez komendę:
+
+          uvicorn main:app --reload --port 8080
+
+4.  Otwórz przeglądarkę i przejdź na adres: [http://127.0.0.1:8000/form].
+
+5.  Następnie wprowadz dane do szacowania.
