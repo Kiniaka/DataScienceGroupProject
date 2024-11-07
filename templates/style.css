@@ -4,12 +4,14 @@ body {
 }
 
 .form {
-  width: 300px;
+  text-align: center;
+  /* width: 300px; */
   margin: 0 auto;
 }
 
 .form2 {
-  width: 600px;
+  text-align: center;
+  /* width: 600px; */
   margin: 0 auto;
 }
 
