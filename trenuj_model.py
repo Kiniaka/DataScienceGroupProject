@@ -35,8 +35,3 @@ def import_from_ipynb(notebook_path, var_name):
 # Użycie funkcji do zaimportowania zmiennej 'model' oraz 'skaler' z notebooka 'Project3.ipynb'
 model = import_from_ipynb('Project3.ipynb', 'model')
 scaler = import_from_ipynb('Project3.ipynb', 'scaler')
-
-
-# Zapis modelu i skalera w jednym pliku
-joblib.dump({'model': model, 'scaler': scaler}, 'model_random_forest.pkl')
-print("Model i skaler zapisane pomyślnie jako model_random_forest.pkl")
