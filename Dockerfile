@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.11.9
 
 # Ustawienie katalogu roboczego wewnątrz kontenera
 WORKDIR /app
