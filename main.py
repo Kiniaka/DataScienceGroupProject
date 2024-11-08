@@ -6,16 +6,34 @@ import numpy as np
 import joblib
 import pandas as pd
 from fastapi.staticfiles import StaticFiles
-
-# Ładowanie modelu i skalera
-loaded = joblib.load('model_random_forest.pkl')
-model = loaded['model']
-scaler = loaded['scaler']
+import os
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
+# Sprawdzenie ścieżki do modelu w zależności od środowiska
+
+if os.path.exists('model_random_forest.pkl'):
+    model_path = 'model_random_forest.pkl'
+elif os.path.exists('/app/model_random_forest.pkl'):
+    model_path = '/app/model_random_forest.pkl'
+else:
+    model_path = None
+
+# Wczytanie modelu i skalera, jeśli plik istnieje
+
+if model_path:
+    try:
+        loaded = joblib.load(model_path)
+        model = loaded.get('model')
+        scaler = loaded.get('scaler')
+    except EOFError:
+        print("Błąd: Plik modelu jest uszkodzony lub niekompletny.")
+else:
+    print("Błąd: Plik model_random_forest.pkl nie został znaleziony.")
+
 # Dodanie obsługi plików statycznych
+
 app.mount("/static", StaticFiles(directory="templates"), name="static")
 
 # Definiowanie modelu danych wejściowych
@@ -34,6 +52,7 @@ class ClientData(BaseModel):
 
 
 # Trasa główna przekierowująca do formularza
+
 @app.get("/", response_class=RedirectResponse)
 async def root():
     return RedirectResponse(url="/form")
