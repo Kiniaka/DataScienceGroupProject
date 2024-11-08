@@ -39,6 +39,7 @@ Aplikacja FastAPI, która przewiduje prawdopodobieństwo rezygnacji klienta na p
 lub"
     docker-compose up --build"        
     ```
+
 3. Otwórz przeglądarkę i przejdź na adres: [http://127.0.0.1:8000/form].
 
 ## Użycie
