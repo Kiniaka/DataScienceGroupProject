@@ -8,13 +8,13 @@ Aplikacja FastAPI, która przewiduje prawdopodobieństwo rezygnacji klienta na p
 
 - Python 3.7 lub nowszy,
 - FastAPI,
-- Uvicorn,
-- scikit-learn,
-- joblib,
-- numpy,
-- pandas,
+- Uvicorn==0.22.0,
+- scikit-learn==1.5.2,
+- joblib==1.4.2,
+- numpy==1.26.4,
+- pandas==2.2.2,
 - python-multipart,
-- jinja2 (do szablonów HTML).
+- jinja2==3.1.2 (do szablonów HTML).
 
 ## Instalacja
 
@@ -36,6 +36,8 @@ Aplikacja FastAPI, która przewiduje prawdopodobieństwo rezygnacji klienta na p
 2. Uruchom aplikację za pomocą Uvicorn:
     ```bash
     uvicorn main:app --reload --port 8000
+lub"
+    docker-compose up --build"        
     ```
 3. Otwórz przeglądarkę i przejdź na adres: [http://127.0.0.1:8000/form].
 
