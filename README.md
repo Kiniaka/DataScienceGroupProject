@@ -43,10 +43,6 @@ Upewnij się, że plik .env zawiera wymagane zmienne środowiskowe
 
           docker compose up
 
-3.  Teraz otwórz drugi terminal i uruchom aplikację fastapi poprzez komendę:
+3.  Otwórz przeglądarkę i przejdź na adres: [http://127.0.0.1:8000/form].
 
-          uvicorn main:app --reload --port 8080
-
-4.  Otwórz przeglądarkę i przejdź na adres: [http://127.0.0.1:8000/form].
-
-5.  Następnie wprowadz dane do szacowania.
+4.  Następnie wprowadz dane do szacowania.
