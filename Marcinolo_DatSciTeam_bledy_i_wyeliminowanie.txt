@@ -1,4 +1,4 @@
-Kmenda w terminal”
+Kmenda w terminalu”
 docker-compose up --build –d
 error” 
 33.31   Downloading pytz-2024.1-py2.py3-none-any.whl (505 kB)
