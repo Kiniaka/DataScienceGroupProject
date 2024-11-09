@@ -4,21 +4,21 @@
 # In[3]:
 
 
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 from scipy.stats import shapiro
 import seaborn as sns
-from sklearn.preprocessing import LabelEncoder,StandardScaler, MinMaxScaler
+from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler
 from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.ensemble import RandomForestClassifier,GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from tabulate import tabulate
 import warnings
 warnings.filterwarnings('ignore')
-
 
 # In[ ]:
 
@@ -41,7 +41,7 @@ print(df.isnull().sum())
 
 
 # HISTOGRAM
-df.hist(bins=50, figsize=(20,15))
+df.hist(bins=50, figsize=(20, 15))
 plt.show()
 #
 
@@ -71,7 +71,7 @@ else:
 
 
 # Test Shapiro-Wilka
-# 
+#
 # 1. Iteruje przez każdą kolumnę w DataFrame df.
 # 2. Oblicza statystykę testu Shapiro-Wilka oraz wartość p (p_value) dla kolumny, pomijając brakujące wartości (NaN).
 # 3. Wyświetlam nazwę kolumny, statystykę testu oraz wartość p.
@@ -93,7 +93,7 @@ for column in df.columns:
 # 1. Iteruję przez każdą kolumnę w DataFrame df.
 # 2. Tworzę wykres Q-Q, używając stats.probplot, pomijając brakujące wartości(NaN) i porównując je z rozkładem normalnym.
 # 3. Ustawiam tytuł wykresu na "Q-Q Plot for {column}" i wyświetla wykres.
-# 
+#
 # PODSUMOWANIE TESTU: Kod ten pomaga zarówno statystycznie, jak i wizualnie ocenić, czy dane w każdej kolumnie mają rozkład normalny.
 
 # In[8]:
@@ -109,13 +109,17 @@ for column in df.columns:
 # In[9]:
 
 
-percentiles = [25, 50, 75]  # Możena podać dowolne percentyle (np. 25%, 50%, 75%)
+# Możena podać dowolne percentyle (np. 25%, 50%, 75%)
+percentiles = [25, 50, 75]
 
 # Obliczenie percentyli
-subscription_age_percentiles = df['subscription_age'].quantile([p / 100 for p in percentiles])
+subscription_age_percentiles = df['subscription_age'].quantile(
+    [p / 100 for p in percentiles])
 bill_avg_percentiles = df['bill_avg'].quantile([p / 100 for p in percentiles])
-reamining_contract_percentiles = df['reamining_contract'].quantile([p / 100 for p in percentiles])
-download_percentiles = df['download_avg'].quantile([p / 100 for p in percentiles])
+reamining_contract_percentiles = df['reamining_contract'].quantile(
+    [p / 100 for p in percentiles])
+download_percentiles = df['download_avg'].quantile(
+    [p / 100 for p in percentiles])
 upload_percentiles = df['upload_avg'].quantile([p / 100 for p in percentiles])
 
 print("Percentyle dla subscription_age:\n", subscription_age_percentiles)
@@ -151,26 +155,28 @@ plt.show()
 label_encoder = LabelEncoder()
 
 # Tworzenie kopii DataFrame
-df_standard =  df.copy()
+df_standard = df.copy()
 
 # Zakodowanie etykiet w kolumnie 'churn'
-df_standard['churn_encoded'] = label_encoder.fit_transform(df_standard['churn'])
+df_standard['churn_encoded'] = label_encoder.fit_transform(
+    df_standard['churn'])
 
 # Zastąpienie zakodowanych wartości etykietami tekstowymi tzn: cyfra 0 zastępowana "pozostaje", a cyfra 1 zastępowana 'odchodzi'.
-df_standard['churn_encoded'] = df['churn'].replace({0: 'pozostaje', 1: 'odchodzi'})
+df_standard['churn_encoded'] = df['churn'].replace(
+    {0: 'pozostaje', 1: 'odchodzi'})
 
 # Wyświetlenie DataFrame po dodaniu kolumny z zakodowanymi danymi
 print("\nDataFrame po dodaniu kolumny Label Encoding:\n", df_standard)
 
 
 # **WALIDACJA KRZYŻOWA** - im wyższe wyniki walidacji krzyżowej tym lepsza generalizację modelu, czyli jego zdolność do poprawnego przewidywania na nowych, niewidzianych wcześniej danych.
-# 
+#
 # **Wynik F1 (F1 Score)** to miara skuteczności modelu, która uwzględnia zarówno precyzję (precision), jak i czułość (recall). Jest szczególnie przydatna w przypadkach, gdy masz do czynienia z niezbalansowanymi danymi.
-# 
+#
 # **Precyzja (Precision)**: Odsetek trafnych pozytywnych przewidywań spośród wszystkich pozytywnych przewidywań (true positives / (true positives + false positives)).
-# 
+#
 # **Czułość (Recall)**: Odsetek trafnych pozytywnych przewidywań spośród wszystkich rzeczywistych pozytywnych przypadków (true positives / (true positives + false negatives)).
-# 
+#
 # **Dokładność (accuracy)** to miara wydajności modelu, która wskazuje, jak dobrze model klasyfikuje dane w porównaniu do wszystkich danych. Jest to stosunek poprawnych przewidywań (zarówno prawdziwie pozytywnych, jak i prawdziwie negatywnych) do całkowitej liczby przewidywań.
 
 # In[18]:
@@ -190,13 +196,15 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
 # Podział na zestaw treningowy i testowy ( zestaw treningowy (X_train, y_train) i testowy (X_test, y_test) w stosunku 80/20 oraz random_state=42, który zapewnia powtarzalność wyników.)
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42)
 
 # Inicjalizacja modelu
 model = RandomForestClassifier(random_state=42)
 
 # Walidacja krzyżowa
-RFC_cross_val_scores = cross_val_score(model, X_train, y_train, cv=5, scoring='accuracy')
+RFC_cross_val_scores = cross_val_score(
+    model, X_train, y_train, cv=5, scoring='accuracy')
 print("Średnia dokładność z walidacji krzyżowej:", RFC_cross_val_scores.mean())
 
 # Uczenie modelu
@@ -235,7 +243,8 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
 # 3. Podział na zestaw treningowy i testowy
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42)
 
 # Inicjalizacja modelu regresji logistycznej
 LR_model = LogisticRegression(
@@ -280,7 +289,8 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
 # Podział na zestaw treningowy i testowy
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42)
 
 # Inicjalizacja modelu SVC ze zwiększoną liczbą iteracji
 SVC_model = SVC(C=0.01, random_state=42, max_iter=1000)
@@ -323,11 +333,12 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
 # Podział na zestaw treningowy i testowy
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42)
 
 # Inicjalizacja Gradient Boosting Classifier
 GBC_model = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0,
-    max_depth=1, random_state=0)
+                                       max_depth=1, random_state=0)
 
 # Walidacja krzyżowa
 GBC_cross_val_scores = cross_val_score(
@@ -361,11 +372,11 @@ print('PORÓWNANIE MODELI:')
 # Dane wyników dla każdego modelu
 data = {
     "Model": ["RandomForestClassifier", "LogisticRegression", "Support Vector Classifier", "GradientBoostingClassifier"],
-    "Cross-Validation Accuracy Mean": [RFC_cross_val_scores, LR_cross_val_scores, SVC_cross_val_scores, GBC_cross_val_scores],
-    "Accuracy": [RFC_accuracy, LR_accuracy, SVC_accuracy, GBC_accuracy],
-    "Recall": [RFC_recall, LR_recall, SVC_recall, GBC_recall],
-    "Precision": [RFC_precision, LR_precision, SVC_precision,  GBC_precision],
-    "F1 Score": [RFC_f1, LR_f1, SVC_f1, GBC_f1]
+    "Cross-Validation Accuracy Mean": [np.mean(RFC_cross_val_scores), np.mean(LR_cross_val_scores), np.mean(SVC_cross_val_scores), np.mean(GBC_cross_val_scores)],
+    "Accuracy": [np.mean(RFC_accuracy), np.mean(LR_accuracy), np.mean(SVC_accuracy), np.mean(GBC_accuracy)],
+    "Recall": [np.mean(RFC_recall), np.mean(LR_recall), np.mean(SVC_recall), np.mean(GBC_recall)],
+    "Precision": [np.mean(RFC_precision), np.mean(LR_precision), np.mean(SVC_precision),  np.mean(GBC_precision)],
+    "F1 Score": [np.mean(RFC_f1), np.mean(LR_f1), np.mean(SVC_f1), np.mean(GBC_f1)]
 }
 
 
@@ -381,17 +392,18 @@ print(df_results)
 
 # Utworzenie wykresu słupkowego dla każdej z miar
 metrics = ["Accuracy", "Recall", "Precision", "F1 Score"]
-df_metrics = df_results.melt(id_vars="Model", value_vars=metrics, var_name="Metric", value_name="Score")
+df_metrics = df_results.melt(
+    id_vars="Model", value_vars=metrics, var_name="Metric", value_name="Score")
 
 plt.figure(figsize=(12, 8))
 for i, metric in enumerate(metrics, 1):
     plt.subplot(2, 2, i)
     subset = df_metrics[df_metrics["Metric"] == metric]
-    plt.bar(subset["Model"], subset["Score"], color=["skyblue", "salmon", "lightgreen", "purple"])
+    plt.bar(subset["Model"], subset["Score"], color=[
+            "skyblue", "salmon", "lightgreen", "purple"])
     plt.title(metric)
     plt.ylim(0, 1)
     plt.xticks(rotation=45)
 
 plt.tight_layout()
 plt.show()
-
