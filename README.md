@@ -4,6 +4,7 @@
 Aplikacja FastAPI, która przewiduje prawdopodobieństwo rezygnacji klienta na podstawie danych o subskrypcji i historii użytkowania. Wyniki są generowane na podstawie modelu uczenia maszynowego wczytanego z pliku model_random_forest.pkl.
 
 ## "Wymagania":
+
 Python 3.7 lub nowszy
 FastAPI
 Uvicorn==0.22.0
@@ -18,28 +19,36 @@ jinja2==3.1.2 (do szablonów HTML)
 "Sklonuj repozytorium":
 
 "Skopiuj code" lub go wpisz:
+
 git clone https://github.com/Kiniaka/DataScienceGroupProject.git
 
 ## "Wejdź do odpowiedniego katalogu":
 
 "Skopiuj code" lub go wpisz:
+
 cd DataScienceGroupProject
 
 ## "Zainstaluj wymagane pakiety":
 
 "Skopiuj code" lub go wpisz:
+
 pip install -r requirements.txt
 
 ## "Uruchamianie aplikacji":
 Upewnij się, że serwer jest uruchomiony w środowisku zdefiniowanym w .env.
 
 "Uruchom aplikację za pomocą Uvicorn":
-"Skopiuj code" lub go wpisz:
-uvicorn main:app --reload --port 8000
-lub użyj Docker Compose:
 
 "Skopiuj code" lub go wpisz:
+
+uvicorn main:app --reload --port 8000
+
+"lub użyj Docker Compose":
+
+"Skopiuj code" lub go wpisz:
+
 docker-compose up --build
+
 Otwórz przeglądarkę i przejdź na adres: http://127.0.0.1:8000/form
 
 ## Użycie":
@@ -53,13 +62,16 @@ Zdefiniuj zmienne środowiskowe w pliku .env zgodnie z poniższym wzorcem:
 plaintext
 
 "Skopiuj code" lub go wpisz:
+
 MODEL_PATH=model_random_forest.pkl
 PORT=8000
 DEBUG=True
+
 Uwagi: Umieść model model_random_forest.pkl w katalogu projektu. Plik powinien zawierać wytrenowany model Random Forest oraz skaler, zapisane w formacie:
 python
 
 "Skopiuj code" lub go wpisz:
+
 {'model': trained_model, 'scaler': scaler}
 
 ## "Code Review":
