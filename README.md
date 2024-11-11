@@ -6,13 +6,21 @@ Aplikacja FastAPI, która przewiduje prawdopodobieństwo rezygnacji klienta na p
 ## "Wymagania":
 
 Python 3.7 lub nowszy
+
 FastAPI
+
 Uvicorn==0.22.0
+
 scikit-learn==1.5.2
+
 joblib==1.4.2
+
 numpy==1.26.4
+
 pandas==2.2.2
+
 python-multipart
+
 jinja2==3.1.2 (do szablonów HTML)
 
 ## "Instalacja":
@@ -64,7 +72,9 @@ plaintext
 "Skopiuj code" lub go wpisz:
 
 MODEL_PATH=model_random_forest.pkl
+
 PORT=8000
+
 DEBUG=True
 
 Uwagi: Umieść model model_random_forest.pkl w katalogu projektu. Plik powinien zawierać wytrenowany model Random Forest oraz skaler, zapisane w formacie:
