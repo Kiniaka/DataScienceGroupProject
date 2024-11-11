@@ -87,6 +87,7 @@ python
 ## "Code Review":
 
 "main.py"
+
 Kod zapisuje model i skaler za pomocą joblib.dump oraz ładuje je, jeśli plik istnieje. Zapewnia to gotowość modelu do użycia.
 Kod sprawdza ścieżkę modelu w dwóch lokalizacjach: lokalnej i /app, co umożliwia działanie zarówno lokalnie, jak i w środowisku produkcyjnym.
 ClientData definiuje dane wejściowe jako model Pydantic, co zapewnia walidację typów i upraszcza obsługę danych wejściowych.
@@ -96,11 +97,13 @@ Kod korzysta z templates.TemplateResponse do renderowania wyników i przekazuje 
 Statyczne zasoby są poprawnie montowane w katalogu templates, co ułatwia dostęp do plików statycznych.
 
 "Wczytywanie danych i wstępne sprawdzenia":
+
 Kod ładuje zestaw danych i wykonuje podstawowe sprawdzenia (head, info, describe oraz sprawdzenie braków danych).
 Zalety: Dobre, początkowe analizy eksploracyjne.
 Sugestia: Warto logować te sprawdzenia zamiast drukować, aby utrzymać porządek w kodzie.
 
 "Uzupełnianie braków danych i normalizacja":
+
 Braki danych są uzupełniane średnią kolumny po przeprowadzeniu normalizacji.
 Obserwacja: Kolumny z NaN są najpierw normalizowane, co może prowadzić do niekonsekwencji w interpretacji. Uzupełnienie wartości przed normalizacją dałoby bardziej interpretowalne wyniki.
 
@@ -110,17 +113,20 @@ Obserwacja: Testy normalności przy dużych zbiorach mogą być kosztowne oblicz
 Sugestia: Rozważ użycie wizualizacji, takich jak wykresy Q-Q, w dużych zbiorach danych.
 
 "Macierz korelacji":
+
 Generowana jest macierz korelacji, wizualizowana za pomocą heatmap.
 Zalety: Przydatna do analizy relacji między zmiennymi.
 Uwaga: Duże macierze mogą być przytłaczające – warto wyświetlać jedynie istotne korelacje.
 
 "import_from_ipynb" i tymczasowy plik:
+
 Funkcja import_from_ipynb załadowuje notebook (.ipynb), konwertuje go na kod Python i importuje jako moduł, umożliwiając pobranie zmiennej.
 Zalety: Pozwala na automatyczne przenoszenie zmiennych z notebooka.
 Sugestia: Dodaj obsługę wyjątków na wypadek, gdyby zmienna nie istniała w notebooku.
 Tymczasowy plik: '_tmp_notebook_code.py' jest praktyczny, ale warto dodać jego czyszczenie po zakończeniu pracy.
 
 "start.sh"
+
 Komunikat informacyjny: Wyświetla informację o oczekiwaniu na start aplikacji.
 Uruchomienie Uvicorn: Skrypt uruchamia serwer na porcie 8000 i nasłuchuje na 0.0.0.0.
 Sugestia: W środowisku produkcyjnym nasłuchiwanie na 0.0.0.0 może być ryzykowne – warto chronić je dodatkowo np. zaporą.
