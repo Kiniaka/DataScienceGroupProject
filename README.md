@@ -227,11 +227,9 @@ Kod trenuj_model.py jest skryptem, który umożliwia importowanie zmiennych z no
 "Importy i Wstępne Konfiguracje":
 
 Importowane są moduły 'nbconvert' i 'nbformat' do konwersji notebooków do formatu Python, 'joblib' do ładowania/zapisu modelu oraz 'StandardScaler' z 'sklearn.preprocessing'.
-Te importy są zgodne z funkcjonalnością skryptu i pozwalają na przetwarzanie i konwersję kodu z notebooka.
+Te importy są funkcjonalnością skryptu i pozwalają na przetwarzanie i konwersję kodu z notebooka.
 
-"Funkcja" 'import_from_ipynb':
-
-"Cel":
+"import_from_ipynb":
 
 Funkcja import_from_ipynb umożliwia załadowanie określonej zmiennej z notebooka .ipynb.
 
@@ -247,12 +245,12 @@ Używając PythonExporter, konwertuje notebook na kod źródłowy w Pythonie.
 Zapis kodu Python do tymczasowego pliku: Kod jest zapisywany w pliku tymczasowym (_tmp_notebook_code.py), co umożliwia jego załadowanie jako moduł w Pythonie.
 Załadowanie modułu: Plik tymczasowy jest ładowany jako moduł za pomocą importlib.
 Pobranie zmiennej: Z funkcji zwracana jest konkretna zmienna z notebooka, która została zdefiniowana w var_name.
-Funkcja jest zwięzła i dobrze przemyślana – pozwala na elastyczne ładowanie dowolnej zmiennej z notebooka.
+Funkcja jest zwięzła przemyślana – pozwala na elastyczne ładowanie dowolnej zmiennej z notebooka.
 
 "Importowanie model i scaler z notebooka":
 
 Kod importuje zmienne model oraz scaler z notebooka Project3.ipynb. Te zmienne są później dostępne w skrypcie i mogą być wykorzystane do dalszych operacji, np. trenowania modelu lub skalowania danych.
-Importowanie jest dobrze przemyślane, jednak zależność od tymczasowego pliku _tmp_notebook_code.py może być wrażliwa na ewentualne konflikty plików w systemie. Można rozważyć generowanie losowych nazw dla tymczasowych plików, aby uniknąć konfliktów.
+Importowanie jest przemyślane, jednak zależność od tymczasowego pliku _tmp_notebook_code.py może być wrażliwa na ewentualne konflikty plików w systemie. Można rozważyć generowanie losowych nazw dla tymczasowych plików, aby uniknąć konfliktów.
 
 "Sugestie":
 
@@ -263,7 +261,6 @@ Warto dodać blok try-except wewnątrz funkcji import_from_ipynb, aby wykrywać 
 "Wydajność i sprzątanie plików": 
 
 Po załadowaniu zmiennych można rozważyć usunięcie tymczasowego pliku _tmp_notebook_code.py, aby uniknąć pozostawiania zbędnych plików na dysku.
-
 
 "Dokumentacja":
 
@@ -297,7 +294,8 @@ FROM python:3.11-slim jest to obraz "slim", więc zajmuje mniej miejsca i przysp
 "Katalog roboczy"
 
 WORKDIR /app ustawia główny katalog roboczy na /app, co jest standardową praktyką, pozwalającą na lepszą organizację plików w kontenerze.
-Instalacja zależności
+
+"Instalacja zależności":
 
 Skopiowanie requirements.txt i instalacja zależności z pip install --no-cache-dir -r requirements.txt jest poprawnym rozwiązaniem.
 
@@ -334,7 +332,7 @@ Dodać EXPOSE (jeśli port jest wymagany).
 
 ## "Wersja":
 
-Użycie version: "3.8" jest dobrym wyborem, ponieważ jest szeroko wspierane i oferuje wystarczającą elastyczność dla aplikacji typu FastAPI.
+Użycie version: "3.8" jest wyborem, ponieważ jest szeroko wspierana i oferuje wystarczającą elastyczność dla aplikacji typu FastAPI.
 
 ##"Usługa app":
 
@@ -344,9 +342,7 @@ Użycie version: "3.8" jest dobrym wyborem, ponieważ jest szeroko wspierane i o
 
 Dockerfile wskazują na budowanie obrazu bezpośrednio z pliku Dockerfile w bieżącym katalogu, co jest odpowiednią konfiguracją.
 
-"Nazwa kontenera":
-
-"container_name":
+"Nazwa kontenera("container_name)":
 
 "fastapi_app" określa nazwę kontenera, co jest przydatne do identyfikacji kontenera podczas jego uruchamiania i monitorowania.
 
@@ -358,11 +354,11 @@ Dockerfile wskazują na budowanie obrazu bezpośrednio z pliku Dockerfile w bie�
 
 - ./model_random_forest.pkl:/app/model_random_forest.pkl udostępnia plik modelu model_random_forest.pkl do użytku w kontenerze, co jest przydatne, jeśli model jest aktualizowany poza kontenerem.
 
-- .:/app udostępnia cały bieżący katalog do /app w kontenerze, co ułatwia rozwój i testowanie, ale w środowisku produkcyjnym lepiej jest ograniczyć to do plików rzeczywiście potrzebnych w kontenerze. Rozważ użycie .dockerignore, by wykluczyć pliki niepotrzebne w środowisku kontenera.
+- .:/app udostępnia cały bieżący katalog do /app w kontenerze, co ułatwia rozwój i testowanie, ale w środowisku produkcyjnym lepiej jest ograniczyć to do plików rzeczywiście potrzebnych w kontenerze. Rozważyć trzeba użycie .dockerignore, by wykluczyć pliki niepotrzebne w środowisku kontenera.
 
 "Env_file":
 
-- .env ładuje zmienne środowiskowe z pliku .env, co jest dobrą praktyką dla lepszej konfiguracji środowiska i bezpieczeństwa.
+- .env ładuje zmienne środowiskowe z pliku .env, co jest praktyczne dla lepszej konfiguracji środowiska i bezpieczeństwa.
 
 ## "Wnioski":
 
