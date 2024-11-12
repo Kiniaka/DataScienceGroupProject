@@ -171,7 +171,7 @@ Histogramy dają wizualne podsumowanie rozkładu dla każdej zmiennej. To cenne 
 Standaryzacja jest stosowana do kolumn z brakującymi wartościami, a następnie wartości są uzupełniane średnią kolumny. Chociaż jest to efektywne, optymalnym rozwiązaniem byłoby najpierw uzupełnienie braków, a dopiero potem standaryzacja, co da bardziej spójne statystycznie dane.
 Końcowe sprawdzenie na obecność braków danych zapewnia, że wszystkie braki zostały uzupełnione, co przygotowuje dane do dalszych analiz.
 
-##"Test Shapiro-Wilka i Wykresy Q-Q":
+## "Test Shapiro-Wilka i Wykresy Q-Q":
 
 Test Shapiro-Wilka oraz wykresy Q-Q dla każdej kolumny pomagają ocenić normalność rozkładu danych. Wyjście wskazuje, że większość kolumn nie spełnia założeń normalności (niski poziom p), co sugeruje, że dane mogą wymagać nieliniowych modeli lub przekształceń dla lepszego dopasowania.
 
