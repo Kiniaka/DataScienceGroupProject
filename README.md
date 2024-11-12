@@ -158,7 +158,9 @@ Ogólnie kod jest dobrze zaprojektowany i zapewnia wszystkie niezbędne funkcjon
 
 ## "Project3.jpynb"
 
-Wczytywanie Danych i Wstępna Analiza: Wczytanie danych oraz ich podstawowa analiza za pomocą funkcji (head, info, describe, isnull) dostarczają kluczowych informacji o strukturze, kompletności i podstawowych statystykach danych. To dobre, pierwsze kroki, aby zrozumieć właściwości zbioru danych.
+"Wczytywanie Danych i Wstępna Analiza":
+
+Wczytanie danych oraz ich podstawowa analiza za pomocą funkcji (head, info, describe, isnull) dostarczają kluczowych informacji o strukturze, kompletności i podstawowych statystykach danych. To dobre, pierwsze kroki, aby zrozumieć właściwości zbioru danych.
 
 ## "Wizualizacja Histogramów":
 
