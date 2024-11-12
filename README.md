@@ -288,6 +288,87 @@ templates zawiera pliki HTML i CSS potrzebne do obsługi interfejsu użytkownika
 ## "Uwagi dotyczące templates"
 Pliki HTML są renderowane przez FastAPI przy użyciu Jinja2, co umożliwia dynamiczne generowanie treści w odpowiedzi na dane wejściowe użytkownika i wyniki predykcji. Plik styles.css jest włączany do wszystkich szablonów HTML, aby zapewnić spójny styl aplikacji.
 
+## "Dockerfile":
 
+"Obraz bazowy":
+
+FROM python:3.11-slim jest to obraz "slim", więc zajmuje mniej miejsca i przyspiesza pobieranie oraz uruchamianie kontenera.
+
+"Katalog roboczy"
+
+WORKDIR /app ustawia główny katalog roboczy na /app, co jest standardową praktyką, pozwalającą na lepszą organizację plików w kontenerze.
+Instalacja zależności
+
+Skopiowanie requirements.txt i instalacja zależności z pip install --no-cache-dir -r requirements.txt jest poprawnym rozwiązaniem.
+
+--no-cache-dir zmniejsza rozmiar obrazu, co jest dobrą praktyką.
+
+"Kopiowanie plików aplikacji"
+
+Plik modelu (model_random_forest.pkl) i folder templates są kopiowane do /app, co jest zgodne z wymaganiami aplikacji.
+
+Linia ADD . /app kopiuje wszystkie pliki do katalogu roboczego, ale warto rozważyć .dockerignore, by uniknąć kopiowania niepotrzebnych plików (np. .git, plików tymczasowych).
+
+"Skrypt startowy"
+
+ADD start.sh /app/start.sh kopiuje skrypt startowy do kontenera, a RUN chmod 777 start.sh nadaje mu pełne prawa.
+Zamiast chmod 777, bardziej zalecane jest nadanie uprawnień chmod +x start.sh lub chmod 755 start.sh, co zmniejsza ryzyko naruszenia bezpieczeństwa.
+
+"Eksponowanie portu i uruchamianie aplikacji":
+
+EXPOSE jest zakomentowane, ale jeżeli aplikacja korzysta z określonego portu, dobrze jest go uwidocznić.
+
+Komenda startowa CMD uruchamia start.sh, co jest odpowiednie, jeśli skrypt ten zawiera całą logikę uruchomienia aplikacji.
+
+"Wnioski":
+
+"Aby ulepszyć Dockerfile, można":
+
+Zastosować .dockerignore dla niepotrzebnych plików,
+
+Zmienić chmod 777 na chmod +x dla bezpieczeństwa,
+
+Dodać EXPOSE (jeśli port jest wymagany).
+
+## "docker-compose.yml":
+
+## "Wersja":
+
+Użycie version: "3.8" jest dobrym wyborem, ponieważ jest szeroko wspierane i oferuje wystarczającą elastyczność dla aplikacji typu FastAPI.
+
+##"Usługa app":
+
+"Build":
+
+"context: . i dockerfile": 
+
+Dockerfile wskazują na budowanie obrazu bezpośrednio z pliku Dockerfile w bieżącym katalogu, co jest odpowiednią konfiguracją.
+
+"Nazwa kontenera":
+
+"container_name":
+
+"fastapi_app" określa nazwę kontenera, co jest przydatne do identyfikacji kontenera podczas jego uruchamiania i monitorowania.
+
+"Porty(ports)":
+
+- "8000:8000" mapuje porty hosta i kontenera, umożliwiając dostęp do aplikacji na localhost:8000. To właściwe ustawienie, biorąc pod uwagę domyślną konfigurację FastAPI na porcie 8000.
+
+"Volumes":
+
+- ./model_random_forest.pkl:/app/model_random_forest.pkl udostępnia plik modelu model_random_forest.pkl do użytku w kontenerze, co jest przydatne, jeśli model jest aktualizowany poza kontenerem.
+
+- .:/app udostępnia cały bieżący katalog do /app w kontenerze, co ułatwia rozwój i testowanie, ale w środowisku produkcyjnym lepiej jest ograniczyć to do plików rzeczywiście potrzebnych w kontenerze. Rozważ użycie .dockerignore, by wykluczyć pliki niepotrzebne w środowisku kontenera.
+
+"Env_file":
+
+- .env ładuje zmienne środowiskowe z pliku .env, co jest dobrą praktyką dla lepszej konfiguracji środowiska i bezpieczeństwa.
+
+## "Wnioski":
+
+"docker-compose.yml warto jednak rozważyć":
+
+Wyłączenie udostępniania całego katalogu (- .:/app) na środowisko produkcyjne i użycie .dockerignore dla niepotrzebnych plików.
+Przemyślenie, czy plik model_random_forest.pkl jest aktualizowany na tyle często, by wymagał montowania przez volume – jeśli nie, można go kopiować do obrazu.
 
 ## "Gotowy szablon README zawiera wszystkie informacje potrzebne do zrozumienia, uruchomienia i ocenienia aplikacji, a także zapewnia dokładny przegląd kodu oraz kluczowe sugestie ulepszające jego funkcjonalność".
